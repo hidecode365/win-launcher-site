@@ -43,6 +43,27 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 - 閉じる手段は3通り: オーバーレイ部分のクリック、閉じるボタンのクリック、Escキー(`useEffect` 内で `keydown` を監視)。画像自体のクリックは `stopPropagation` でオーバーレイのクリック判定から除外している。
 - モーダル表示中は `document.body.style.overflow = 'hidden'` で背景スクロールをロックし、閉じたとき/アンマウント時に元に戻す。
 
+### ヒーロー部分のダウンロードボタン(`DownloadDropdown.tsx`)
+
+「GitHub Releasesからダウンロード」ボタンは、クリックで直下にドロップダウン(.exe / .msi / その他のアセット の3項目)を開く方式になっている。実装は `src/components/DownloadDropdown.tsx` + `DownloadDropdown.css`(Reactコンポーネント、`Hero.astro` から `client:load` で読み込み)。
+
+- マウント時に GitHub API(`https://api.github.com/repos/hidecode365/win-launcher/releases/latest`)を `fetch` し、`assets` 配列から末尾が `.exe` / `.msi` のファイルを探して `browser_download_url` を取得する。リリースアセットのファイル名にはバージョン番号が含まれるためハードコードせず、常にAPIレスポンスから動的に解決している(新バージョンリリース時もサイト側のコード変更は不要)。
+- 取得結果は `sessionStorage`(キー `winlauncher-latest-release-assets`)に一時キャッシュし、同一セッション内での再フェッチを避けている。
+- API呼び出しが失敗した場合(レート制限・オフライン等)は、ボタン全体を Releases ページへの直接リンク(`<a>`)として描画するフォールバックに切り替わる。この場合ドロップダウンは開かない。
+- ドロップダウンの開閉はメニュー外クリック(`mousedown` を監視し `ref` の外側判定)と Esc キーで閉じられる。
+- 通常時(未クリック時)のボタンの見た目・ラベルは変更前の `.btn-secondary` と同一になるよう `.download-dropdown__trigger` に同じスタイルを移植している。Astroのスコープ付きCSSはReact島(子コンポーネント)側の要素には適用されないため、旧 `Hero.astro` の `.btn-secondary` ルールは削除し `DownloadDropdown.css` 側に持たせている。
+
+### 「補足情報」セクション(旧「導入方法」セクション、`Install.astro`)
+
+旧「導入方法」セクション(wingetコマンドのコードブロック+「手動インストールはこちら」リンク)は削除し、以下4項目を並べる補足情報セクションに差し替えた。
+
+- 動作環境(Windows 11 x64)
+- インストーラーの選び方(.exe = 個人向け通常インストール推奨 / .msi = 企業のサイレントインストール・MDM配布向け)
+- 自動更新について(バックグラウンドで自動的に最新版へ更新される旨)
+- オープンソース・サーバーレスである旨
+
+wingetコマンドのコピー機能はヒーロー部分に既にあり重複するため、このセクションでは扱わない。ファイル名・コンポーネント名(`Install.astro`)は変更していないが、中身は `FeatureGrid` のカードと似た `info-card` グリッド(2列→640px以下で1列)に置き換わっている。
+
 ## ドキュメント
 
 公式ドキュメント: https://docs.astro.build

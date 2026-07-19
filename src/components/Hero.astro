@@ -1,5 +1,6 @@
 ---
 import CopyCommandButton from './CopyCommandButton';
+import DownloadDropdown from './DownloadDropdown';
 
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
@@ -25,14 +26,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
         label="winget install コマンドをコピー"
         variant="primary"
       />
-      <a
-        class="btn-secondary"
-        href="https://github.com/hidecode365/win-launcher/releases"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub Releasesからダウンロード
-      </a>
+      <DownloadDropdown client:load />
     </div>
   </div>
 </section>
@@ -107,24 +101,6 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     align-items: center;
     justify-content: center;
     gap: 16px;
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    padding: 14px 28px;
-    font-weight: 600;
-    color: var(--color-text);
-    background: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-radius: 999px;
-    text-decoration: none;
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    text-decoration: none;
   }
 
   @media (max-width: 480px) {

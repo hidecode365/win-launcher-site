@@ -1,56 +1,88 @@
 ---
-import CopyCommandButton from './CopyCommandButton';
-
-const command = 'winget install hidecode365.WinLauncher';
+const notes = [
+  {
+    icon: '🖥️',
+    title: '動作環境',
+    desc: 'Windows 11 (x64)',
+  },
+  {
+    icon: '📦',
+    title: 'インストーラーの選び方',
+    desc: '「.exe」は通常インストール向け(個人利用・推奨)。「.msi」は企業のサイレントインストールやMDM配布向けです。',
+  },
+  {
+    icon: '🔄',
+    title: '自動更新について',
+    desc: 'インストール後はバックグラウンドで自動的に最新版へ更新されます。',
+  },
+  {
+    icon: '🔓',
+    title: 'オープンソース・サーバーレス',
+    desc: 'ソースコードは公開されており、外部サーバーへ通信しない設計のため安心してご利用いただけます。',
+  },
+];
 ---
 
-<section class="install">
+<section class="install-info">
   <div class="container">
-    <h2 class="section-title">導入方法</h2>
-    <div class="install-box">
-      <code class="install-command">{command}</code>
-      <CopyCommandButton client:load command={command} label="コピー" variant="compact" />
+    <h2 class="section-title">補足情報</h2>
+    <div class="info-grid">
+      {
+        notes.map((note) => (
+          <div class="info-card">
+            <div class="info-icon" aria-hidden="true">
+              {note.icon}
+            </div>
+            <h3>{note.title}</h3>
+            <p>{note.desc}</p>
+          </div>
+        ))
+      }
     </div>
-    <p class="install-note">
-      <a href="https://github.com/hidecode365/win-launcher/releases" target="_blank" rel="noopener noreferrer">
-        手動インストールはこちら
-      </a>
-    </p>
   </div>
 </section>
 
 <style>
-  .install-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 20px 24px;
-    background: #1f2430;
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .info-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    overflow-x: auto;
+    padding: 24px;
+    text-align: left;
   }
 
-  .install-command {
-    font-family: var(--font-mono);
-    font-size: 1.05rem;
-    color: #f5f7fa;
-    white-space: nowrap;
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+    background: var(--color-accent-soft);
+    border-radius: 10px;
   }
 
-  .install-note {
-    text-align: center;
-    margin-top: 20px;
+  .info-card h3 {
+    font-size: 1rem;
+    margin: 0 0 8px;
+  }
+
+  .info-card p {
+    font-size: 0.9rem;
     color: var(--color-text-muted);
+    margin: 0;
   }
 
   @media (max-width: 640px) {
-    .install-box {
-      flex-direction: column;
-      align-items: stretch;
-      text-align: center;
+    .info-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
