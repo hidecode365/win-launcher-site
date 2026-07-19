@@ -1,10 +1,13 @@
 ---
 import CopyCommandButton from './CopyCommandButton';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="hero">
   <div class="container hero-inner">
-    <h1>すべてのアプリへ、最短距離。</h1>
+    <img class="logo" src={`${base}app-icon.png`} width="64" height="64" alt="WinLauncher" />
+    <h1>すべてのアプリへ最短距離</h1>
     <p class="subtext">無料・オープンソース・サーバーレス。Windows 11のためのキーボードランチャー</p>
 
     <div class="hotkey" aria-label="ホットキー Alt プラス Space">
@@ -47,10 +50,18 @@ import CopyCommandButton from './CopyCommandButton';
     gap: 8px;
   }
 
+  .logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    margin-bottom: 8px;
+  }
+
   h1 {
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
     max-width: 20ch;
+    text-wrap: balance;
   }
 
   .subtext {

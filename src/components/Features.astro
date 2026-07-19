@@ -1,24 +1,30 @@
 ---
+const base = import.meta.env.BASE_URL;
+
 const features = [
   {
     icon: '🔍',
     title: 'アプリ・ファイル・フォルダ検索',
     desc: 'ホットキー一つで、あらゆるアプリ・ファイル・フォルダへ即座にアクセス。',
+    screenshot: 'screenshot-search.png',
   },
   {
     icon: '🖼️',
     title: 'OCR検索',
     desc: '画面上のテキストを画像から抽出し、そのまま検索対象にできます。',
+    screenshot: 'screenshot-ocr.png',
   },
   {
     icon: '/',
     title: '明示プレフィックス方式',
     desc: '`/`コマンドでシステム操作・クリップボード履歴などを素早く呼び出せます。',
+    screenshot: 'screenshot-clipboard.png',
   },
   {
     icon: '⚡',
     title: '自動更新・軽量動作・完全無料',
     desc: 'バックグラウンドで静かに動作し、常に最新の状態を保てます。',
+    screenshot: 'screenshot-settings.png',
   },
 ];
 ---
@@ -35,6 +41,12 @@ const features = [
             </div>
             <h3>{f.title}</h3>
             <p>{f.desc}</p>
+            <img
+              class="feature-screenshot"
+              src={`${base}screenshots/${f.screenshot}`}
+              alt={f.title}
+              loading="lazy"
+            />
           </div>
         ))
       }
@@ -80,6 +92,14 @@ const features = [
   .feature-card p {
     font-size: 0.95rem;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 16px;
+  }
+
+  .feature-screenshot {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--color-border);
   }
 </style>
