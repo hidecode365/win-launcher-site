@@ -34,21 +34,25 @@ const features = [
 <section class="features">
   <div class="container">
     <h2 class="section-title">主要機能</h2>
-    <div class="feature-grid">
+    <div class="feature-list">
       {
         features.map((f) => (
-          <div class="feature-card">
-            <div class="feature-icon" aria-hidden="true">
-              {f.icon}
+          <div class="feature-row">
+            <div class="feature-text">
+              <div class="feature-icon" aria-hidden="true">
+                {f.icon}
+              </div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
             </div>
-            <h3>{f.title}</h3>
-            <p>{f.desc}</p>
-            <img
-              class="feature-screenshot"
-              src={`${base}screenshots/${f.screenshot}`}
-              alt={f.title}
-              loading="lazy"
-            />
+            <div class="feature-media">
+              <img
+                class="feature-screenshot"
+                src={`${base}screenshots/${f.screenshot}`}
+                alt={f.title}
+                loading="lazy"
+              />
+            </div>
           </div>
         ))
       }
@@ -57,18 +61,29 @@ const features = [
 </section>
 
 <style>
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
   }
 
-  .feature-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: 28px 24px;
+  .feature-row {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .feature-row:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .feature-text {
+    flex: 1 1 40%;
     text-align: left;
+  }
+
+  .feature-media {
+    flex: 1 1 58%;
   }
 
   .feature-icon {
@@ -86,22 +101,61 @@ const features = [
     border-radius: 10px;
   }
 
-  .feature-card h3 {
-    font-size: 1.05rem;
+  .feature-text h3 {
+    font-size: 1.25rem;
     margin-bottom: 8px;
   }
 
-  .feature-card p {
-    font-size: 0.95rem;
+  .feature-text p {
+    font-size: 1rem;
     color: var(--color-text-muted);
-    margin: 0 0 16px;
+    margin: 0;
+  }
+
+  .feature-media {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    padding: 12px;
   }
 
   .feature-screenshot {
     display: block;
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-    border: 1px solid var(--color-border);
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 720px) {
+    .feature-list {
+      gap: 40px;
+    }
+
+    .feature-row,
+    .feature-row:nth-child(even) {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .feature-text,
+    .feature-media {
+      flex: 1 1 auto;
+    }
+
+    .feature-text {
+      text-align: center;
+    }
+
+    .feature-icon {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 </style>
