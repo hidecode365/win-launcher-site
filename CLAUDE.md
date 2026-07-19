@@ -32,15 +32,16 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 - スクリーンショット素材: `D:\ai_work\dev_win\win-launcher\docs\`(ファイル名は `screenshot-*.png`)→ `public/screenshots/` にコピー
 - アプリアイコン: `D:\ai_work\dev_win\win-launcher\src-tauri\icons\` → `public/favicon.ico`(`icon.ico`)、`public/app-icon.png`(`128x128@2x.png`)、`public/favicon.svg`(`64x64.png` をbase64埋め込みしたSVGラッパー。本体側に真のベクター素材が無いため)
 
-### 「主要機能」セクションのレイアウト(`Features.astro`)
+### 「主要機能」セクションのレイアウト(`Features.astro` / `FeatureGrid.tsx`)
 
-4カード横並びグリッドではなく、1機能1行(row)で画像とテキストを左右交互配置するレイアウトを採用している。
+4機能を2列×2行のカードグリッドで表示し、各カードのスクリーンショットはクリックでライトボックス(拡大モーダル)表示できる。
 
-- DOM順は常に「テキスト→画像」(`.feature-text` → `.feature-media`)で固定し、スクリーンリーダーの読み上げ順を安定させている。視覚的な左右の入れ替えは `flex-direction` で行う: 奇数行(1, 3番目)はそのまま(テキスト→画像)、偶数行(2, 4番目)は `.feature-row:nth-child(even) { flex-direction: row-reverse; }` で反転(画像→テキスト)。
-- 画像側 `.feature-media` は `flex: 1 1 58%`、テキスト側 `.feature-text` は `flex: 1 1 40%` とし、画像を大きく見せている。
-- 画像は `aspect-ratio: 16 / 9` の枠(WinLauncher本体のスクリーンショットが概ね16:9前後のため)に `object-fit: contain` で収め、UIの一部が切れないようにしている(クロップしたい場合は `cover` に変更を検討)。
-- 幅720px以下では `flex-direction: column-reverse` に切り替え、画像を上・テキストを下に縦積みする1カラムレイアウトになる(交互配置は解除)。DOM順が「テキスト→画像」のため `column-reverse` で画像が先頭に来る。
-- ライトボックス(画像クリック拡大)は現状未実装。
+- `Features.astro` は静的なセクション見出し・データ配列(アイコン・タイトル・説明・画像パス)を組み立てるだけの薄いAstroコンポーネント。グリッド本体とライトボックスの状態管理(クリック開閉・Escキー・背景スクロールロック)はインタラクションが必要なため `FeatureGrid.tsx`(React, `client:load`)に実装している。スタイルは `FeatureGrid.css` に分離。
+- グリッドは `grid-template-columns: repeat(2, 1fr)`(PC幅)。幅640px以下で `grid-template-columns: 1fr` の1カラムに切り替える。
+- 各カードの画像は `aspect-ratio: 16 / 9` の枠(WinLauncher本体のスクリーンショットが概ね16:9前後のため)に `object-fit: contain` で収め、UIの一部が切れないようにしている(クロップしたい場合は `cover` に変更を検討)。画像は `<button>` でラップしてクリック可能にしている。
+- ライトボックスは半透明オーバーレイ(`.lightbox-overlay`)+中央に原寸に近いサイズの画像(`.lightbox-image`、`max-width: 92vw` / `max-height: 88vh` で画面からはみ出さないよう制限)+右上の閉じるボタン(`.lightbox-close`)で構成。外部ライブラリは使わず、Reactの `useState` / `useEffect` のみで実装している。
+- 閉じる手段は3通り: オーバーレイ部分のクリック、閉じるボタンのクリック、Escキー(`useEffect` 内で `keydown` を監視)。画像自体のクリックは `stopPropagation` でオーバーレイのクリック判定から除外している。
+- モーダル表示中は `document.body.style.overflow = 'hidden'` で背景スクロールをロックし、閉じたとき/アンマウント時に元に戻す。
 
 ## ドキュメント
 

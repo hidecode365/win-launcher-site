@@ -1,9 +1,11 @@
 ---
+import FeatureGrid from './FeatureGrid';
+
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const features = [
+const featureData = [
   {
     icon: '🔍',
     title: 'アプリ・ファイル・フォルダ検索',
@@ -29,133 +31,18 @@ const features = [
     screenshot: 'screenshot-settings.png',
   },
 ];
+
+const features = featureData.map((f) => ({
+  icon: f.icon,
+  title: f.title,
+  desc: f.desc,
+  src: `${base}screenshots/${f.screenshot}`,
+}));
 ---
 
 <section class="features">
   <div class="container">
     <h2 class="section-title">主要機能</h2>
-    <div class="feature-list">
-      {
-        features.map((f) => (
-          <div class="feature-row">
-            <div class="feature-text">
-              <div class="feature-icon" aria-hidden="true">
-                {f.icon}
-              </div>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
-            <div class="feature-media">
-              <img
-                class="feature-screenshot"
-                src={`${base}screenshots/${f.screenshot}`}
-                alt={f.title}
-                loading="lazy"
-              />
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <FeatureGrid client:load features={features} />
   </div>
 </section>
-
-<style>
-  .feature-list {
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-  }
-
-  .feature-row {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .feature-row:nth-child(even) {
-    flex-direction: row-reverse;
-  }
-
-  .feature-text {
-    flex: 1 1 40%;
-    text-align: left;
-  }
-
-  .feature-media {
-    flex: 1 1 58%;
-  }
-
-  .feature-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 16px;
-    font-size: 1.5rem;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    border-radius: 10px;
-  }
-
-  .feature-text h3 {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-  }
-
-  .feature-text p {
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    margin: 0;
-  }
-
-  .feature-media {
-    aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent-soft);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
-    overflow: hidden;
-    padding: 12px;
-  }
-
-  .feature-screenshot {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  @media (max-width: 720px) {
-    .feature-list {
-      gap: 40px;
-    }
-
-    .feature-row,
-    .feature-row:nth-child(even) {
-      flex-direction: column-reverse;
-      align-items: stretch;
-      gap: 20px;
-    }
-
-    .feature-text,
-    .feature-media {
-      flex: 1 1 auto;
-    }
-
-    .feature-text {
-      text-align: center;
-    }
-
-    .feature-icon {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-</style>
