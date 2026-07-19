@@ -8,6 +8,18 @@ astro dev --background
 
 バックグラウンドサーバーは `astro dev stop`、`astro dev status`、`astro dev logs` で管理します。
 
+### base配下の画像パス生成時の注意
+
+このプロジェクトは `astro.config.mjs` で `base: "/win-launcher-site"`(末尾スラッシュなし)を設定しているが、`import.meta.env.BASE_URL` はこの値をそのまま返すため、実際には**末尾スラッシュ無し**の文字列になる。`` `${import.meta.env.BASE_URL}favicon.svg` `` のように単純結合すると `/win-launcher-sitefavicon.svg` という区切りスラッシュ欠落のパスになり、GitHub Pages上で404になる(実際に発生した不具合)。
+
+`public/` 配下のファイルをコンポーネント内で参照する際は、必ず末尾スラッシュを正規化してから結合すること。
+
+```js
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+```
+
 ## 運用上の注意
 
 - カレントディレクトリが既にこのプロジェクトルート(`win-launcher-site`)になっているセッションでは、コマンドの先頭に `cd "D:/ai_work/dev_win/win-launcher-site" &&` を毎回付けないでください。カレントディレクトリが不明な場合のみ、確認してから実行してください。
