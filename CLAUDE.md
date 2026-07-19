@@ -1,22 +1,27 @@
-## Development
+## 開発
 
-When starting the dev server, use background mode:
+開発サーバーを起動する際は、バックグラウンドモードを使用してください。
 
 ```
 astro dev --background
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+バックグラウンドサーバーは `astro dev stop`、`astro dev status`、`astro dev logs` で管理します。
 
-## Documentation
+## 運用上の注意
 
-Full documentation: https://docs.astro.build
+- カレントディレクトリが既にこのプロジェクトルート(`win-launcher-site`)になっているセッションでは、コマンドの先頭に `cd "D:/ai_work/dev_win/win-launcher-site" &&` を毎回付けないでください。カレントディレクトリが不明な場合のみ、確認してから実行してください。
+- このリポジトリの `CLAUDE.md` は日本語で記載・更新する方針とします。
 
-Consult these guides before working on related tasks:
+## ドキュメント
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+公式ドキュメント: https://docs.astro.build
+
+関連タスクに着手する前に、以下のガイドを参照してください。
+
+- [ページ、動的ルート、ミドルウェアの追加](https://docs.astro.build/en/guides/routing/)
+- [Astroコンポーネントの利用](https://docs.astro.build/en/basics/astro-components/)
+- [React、Vue、Svelteなど他フレームワークのコンポーネント利用](https://docs.astro.build/en/guides/framework-components/)
+- [コンテンツの追加・管理](https://docs.astro.build/en/guides/content-collections/)
+- [スタイルの追加・Tailwindの利用](https://docs.astro.build/en/guides/styling/)
+- [多言語対応](https://docs.astro.build/en/guides/internationalization/)
