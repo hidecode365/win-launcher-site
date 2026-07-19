@@ -6,7 +6,9 @@ import Install from '../components/Install.astro';
 import Shortcuts from '../components/Shortcuts.astro';
 import Footer from '../components/Footer.astro';
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.endsWith('/')
+	? import.meta.env.BASE_URL
+	: `${import.meta.env.BASE_URL}/`;
 ---
 
 <html lang="ja">
