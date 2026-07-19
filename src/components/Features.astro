@@ -1,0 +1,85 @@
+---
+const features = [
+  {
+    icon: '🔍',
+    title: 'アプリ・ファイル・フォルダ検索',
+    desc: 'ホットキー一つで、あらゆるアプリ・ファイル・フォルダへ即座にアクセス。',
+  },
+  {
+    icon: '🖼️',
+    title: 'OCR検索',
+    desc: '画面上のテキストを画像から抽出し、そのまま検索対象にできます。',
+  },
+  {
+    icon: '/',
+    title: '明示プレフィックス方式',
+    desc: '`/`コマンドでシステム操作・クリップボード履歴などを素早く呼び出せます。',
+  },
+  {
+    icon: '⚡',
+    title: '自動更新・軽量動作・完全無料',
+    desc: 'バックグラウンドで静かに動作し、常に最新の状態を保てます。',
+  },
+];
+---
+
+<section class="features">
+  <div class="container">
+    <h2 class="section-title">主要機能</h2>
+    <div class="feature-grid">
+      {
+        features.map((f) => (
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              {f.icon}
+            </div>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: left;
+  }
+
+  .feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border-radius: 10px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+import CopyCommandButton from './CopyCommandButton';
+
+const command = 'winget install hidecode365.WinLauncher';
+---
+
+<section class="install">
+  <div class="container">
+    <h2 class="section-title">導入方法</h2>
+    <div class="install-box">
+      <code class="install-command">{command}</code>
+      <CopyCommandButton client:load command={command} label="コピー" variant="compact" />
+    </div>
+    <p class="install-note">
+      <a href="https://github.com/hidecode365/win-launcher/releases" target="_blank" rel="noopener noreferrer">
+        手動インストールはこちら
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .install-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    background: #1f2430;
+    border-radius: var(--radius);
+    overflow-x: auto;
+  }
+
+  .install-command {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: #f5f7fa;
+    white-space: nowrap;
+  }
+
+  .install-note {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .install-box {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+  }
+</style>

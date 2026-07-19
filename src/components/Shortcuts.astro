@@ -1,0 +1,86 @@
+---
+const shortcuts = [
+  { action: '検索ウィンドウの表示/非表示', key: 'Alt + Space' },
+  { action: '候補・項目の選択移動', key: '↑ / ↓' },
+  { action: '選択中の項目を確定(起動・コピーなど)', key: 'Enter' },
+  { action: 'ウィンドウを非表示', key: 'Esc' },
+  { action: '設定画面の表示/非表示', key: 'Ctrl + S' },
+  { action: '格納フォルダを開く(ファイル検索・/recentのみ)', key: 'Shift + Enter' },
+  { action: 'クエリを全クリア', key: 'Ctrl + D' },
+  { action: '画像からテキストを抽出(OCR)', key: 'Ctrl + V(画像貼り付け時)' },
+  { action: 'クリップボード履歴を開く', key: '/cb' },
+  { action: '最近使ったファイル一覧を開く', key: '/recent' },
+  { action: 'シャットダウン', key: '/shutdown' },
+  { action: '再起動', key: '/restart' },
+  { action: 'スリープ', key: '/sleep' },
+];
+---
+
+<section class="shortcuts">
+  <div class="container">
+    <h2 class="section-title">ショートカット早見表</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>操作</th>
+            <th>キー</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            shortcuts.map((s) => (
+              <tr>
+                <td>{s.action}</td>
+                <td>
+                  <code>{s.key}</code>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 480px;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.95rem;
+  }
+
+  th {
+    color: var(--color-text-muted);
+    font-weight: 600;
+    background: var(--color-accent-soft);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  td code {
+    font-size: 0.9rem;
+    color: var(--color-accent-dark);
+    background: var(--color-accent-soft);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+</style>

@@ -1,17 +1,32 @@
 ---
+import '../styles/global.css';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import Install from '../components/Install.astro';
+import Shortcuts from '../components/Shortcuts.astro';
+import Footer from '../components/Footer.astro';
 
+const base = import.meta.env.BASE_URL;
 ---
 
-<html lang="en">
+<html lang="ja">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<link rel="icon" href={`${base}favicon.ico`} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta
+			name="description"
+			content="WinLauncher — 無料・オープンソース・サーバーレス。Windows 11のためのキーボードランチャー。"
+		/>
+		<title>WinLauncher — すべてのアプリへ、最短距離。</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Hero />
+		<Features />
+		<Install />
+		<Shortcuts />
+		<Footer />
 	</body>
 </html>

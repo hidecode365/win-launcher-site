@@ -1,0 +1,125 @@
+---
+import CopyCommandButton from './CopyCommandButton';
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>すべてのアプリへ、最短距離。</h1>
+    <p class="subtext">無料・オープンソース・サーバーレス。Windows 11のためのキーボードランチャー</p>
+
+    <div class="hotkey" aria-label="ホットキー Alt プラス Space">
+      <span class="keycap">Alt</span>
+      <span class="plus">+</span>
+      <span class="keycap">Space</span>
+    </div>
+
+    <div class="cta-group">
+      <CopyCommandButton
+        client:load
+        command="winget install hidecode365.WinLauncher"
+        label="winget install コマンドをコピー"
+        variant="primary"
+      />
+      <a
+        class="btn-secondary"
+        href="https://github.com/hidecode365/win-launcher/releases"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub Releasesからダウンロード
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 96px;
+    padding-bottom: 96px;
+    background: linear-gradient(180deg, var(--color-accent-soft) 0%, var(--color-bg) 100%);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    max-width: 20ch;
+  }
+
+  .subtext {
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    max-width: 44ch;
+    margin-bottom: 12px;
+  }
+
+  .hotkey {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 32px;
+  }
+
+  .keycap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 84px;
+    padding: 14px 20px;
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 3px 0 var(--color-border);
+  }
+
+  .plus {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+  }
+
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 480px) {
+    .keycap {
+      min-width: 64px;
+      padding: 10px 14px;
+      font-size: 1.1rem;
+    }
+  }
+</style>
