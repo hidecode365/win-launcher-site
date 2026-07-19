@@ -20,6 +20,11 @@ const notes = [
     title: 'オープンソース・サーバーレス',
     desc: 'ソースコードは公開されており、外部サーバーへ通信しない設計のため安心してご利用いただけます。',
   },
+  {
+    icon: '🛡️',
+    title: '初回インストール時の警告について',
+    desc: 'コード署名を行っていないため、インストール時にWindowsの警告が表示されますが、そのまま進めていただいて問題ありません。',
+  },
 ];
 ---
 
@@ -55,6 +60,10 @@ const notes = [
     border-radius: var(--radius);
     padding: 24px;
     text-align: left;
+  }
+
+  .info-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 
   .info-icon {
