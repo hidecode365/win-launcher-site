@@ -10,6 +10,7 @@ const base = import.meta.env.BASE_URL.endsWith('/')
 <section class="hero">
   <div class="container hero-inner">
     <img class="logo" src={`${base}app-icon.png`} width="64" height="64" alt="WinLauncher" />
+    <p class="wordmark">WinLauncher</p>
     <h1>すべてのアプリへ最短距離</h1>
     <p class="subtext">無料・オープンソース・サーバーレス。Windows 11のためのキーボードランチャー</p>
 
@@ -51,6 +52,14 @@ const base = import.meta.env.BASE_URL.endsWith('/')
     height: 64px;
     border-radius: 16px;
     margin-bottom: 8px;
+  }
+
+  .wordmark {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-accent);
   }
 
   h1 {
